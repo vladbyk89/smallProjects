@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drum Kit challenge 1</title>
+    <link rel="stylesheet" href="./dist/style.css" />
+  </head>
+  <body>
+    <div class="keys">
+      <div data-key="a" class="keys__key">
+        <kbd>A</kbd>
+        <span class="keys__key__sound">clap</span>
+      </div>
+      <div data-key="s" class="keys__key">
+        <kbd>S</kbd>
+        <span class="keys__key__sound">hihat</span>
+      </div>
+      <div data-key="d" class="keys__key">
+        <kbd>D</kbd>
+        <span class="keys__key__sound">kick</span>
+      </div>
+      <div data-key="f" class="keys__key">
+        <kbd>F</kbd>
+        <span class="keys__key__sound">openhat</span>
+      </div>
+      <div data-key="g" class="keys__key">
+        <kbd>G</kbd>
+        <span class="keys__key__sound">boom</span>
+      </div>
+      <div data-key="h" class="keys__key">
+        <kbd>H</kbd>
+        <span class="keys__key__sound">ride</span>
+      </div>
+      <div data-key="j" class="keys__key">
+        <kbd>J</kbd>
+        <span class="keys__key__sound">snare</span>
+      </div>
+      <div data-key="k" class="keys__key">
+        <kbd>K</kbd>
+        <span class="keys__key__sound">tom</span>
+      </div>
+      <div data-key="l" class="keys__key">
+        <kbd>L</kbd>
+        <span class="keys__key__sound">tink</span>
+      </div>
+    </div>
+
+    <audio data-key="a" src="sounds/clap.wav"></audio>
+    <audio data-key="s" src="sounds/hihat.wav"></audio>
+    <audio data-key="d" src="sounds/kick.wav"></audio>
+    <audio data-key="f" src="sounds/openhat.wav"></audio>
+    <audio data-key="g" src="sounds/boom.wav"></audio>
+    <audio data-key="h" src="sounds/ride.wav"></audio>
+    <audio data-key="j" src="sounds/snare.wav"></audio>
+    <audio data-key="k" src="sounds/tom.wav"></audio>
+    <audio data-key="l" src="sounds/tink.wav"></audio>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
