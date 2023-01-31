@@ -30,6 +30,9 @@ function animate() {
             pallets.splice(i, 1);
         }
     }
+    ghosts.forEach(function (ghost) {
+        ghost.draw();
+    });
     pacman.update();
     requestAnimationFrame(animate);
 }

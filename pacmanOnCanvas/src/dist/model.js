@@ -1,5 +1,5 @@
 var map = [
-    ["#", "#", '#', '#', '#', '#', '#', '#', '#', '#', '#', "#", "#"],
+    ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"],
     ["#", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "#"],
     ["#", ".", "#", "#", ".", "#", "#", "#", ".", "#", "#", ".", "#"],
     ["#", ".", ".", ".", ".", ".", "#", ".", ".", ".", ".", ".", "#"],
@@ -11,7 +11,7 @@ var map = [
     ["#", ".", ".", ".", ".", ".", "#", ".", ".", ".", ".", ".", "#"],
     ["#", ".", "#", "#", ".", "#", "#", "#", ".", "#", "#", ".", "#"],
     ["#", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "#"],
-    ["#", "#", '#', '#', '#', '#', '#', '#', '#', '#', '#', "#", "#"],
+    ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"],
 ];
 var Pacman = /** @class */ (function () {
     function Pacman(_a) {
@@ -37,7 +37,7 @@ var Pacman = /** @class */ (function () {
 var Ghost = /** @class */ (function () {
     function Ghost(_a, color) {
         var position = _a.position, velocity = _a.velocity;
-        if (color === void 0) { color = 'pink'; }
+        if (color === void 0) { color = "pink"; }
         this.color = color;
         this.position = position;
         this.velocity = velocity;
@@ -94,7 +94,48 @@ var keysPressed = {
 var boundries = [];
 var roads = [];
 var pallets = [];
-var ghosts = [];
+var ghosts = [
+    new Ghost({
+        position: {
+            x: squareSize * 5.5,
+            y: squareSize * 5.5
+        },
+        velocity: {
+            x: 0,
+            y: 0
+        }
+    }),
+    new Ghost({
+        position: {
+            x: squareSize * 7.5,
+            y: squareSize * 5.5
+        },
+        velocity: {
+            x: 0,
+            y: 0
+        }
+    }, 'orange'),
+    new Ghost({
+        position: {
+            x: squareSize * 5.5,
+            y: squareSize * 7.5
+        },
+        velocity: {
+            x: 0,
+            y: 0
+        }
+    }, 'red'),
+    new Ghost({
+        position: {
+            x: squareSize * 7.5,
+            y: squareSize * 7.5
+        },
+        velocity: {
+            x: 0,
+            y: 0
+        }
+    }, 'purple')
+];
 var pacman = new Pacman({
     position: {
         x: squareSize * 1.5,

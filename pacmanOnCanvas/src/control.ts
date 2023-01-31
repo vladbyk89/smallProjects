@@ -28,6 +28,10 @@ function animate() {
     }
   }
 
+  ghosts.forEach(ghost => {
+    ghost.draw();
+  })
+
   pacman.update();
   requestAnimationFrame(animate);
 }
