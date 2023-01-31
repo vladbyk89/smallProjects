@@ -4,10 +4,11 @@ const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 canvas.width = innerHeight - 50;
 canvas.height = innerHeight - 50;
 
+const liveScore = document.querySelector('.liveScore') as HTMLSpanElement;
 let score:number = 0;
 let lastKeyPressed: string;
 const pacmanSpeed: number = 5;
-const squareSize = canvas.width / 14;
+const squareSize = canvas.width / 13;
 
 function createMaze(maze: string[][]) {
   maze.forEach((row, i) => {
@@ -22,7 +23,7 @@ function createMaze(maze: string[][]) {
           });
           boundries.push(boundry);
           break;
-        case "-":
+        case ".":
           const pallet = new Pallet(
             new Boundary({
               position: {

@@ -26,6 +26,7 @@ function animate() {
         if (Math.hypot(pallets[i].position.x - pacman.position.x, pallets[i].position.y - pacman.position.y) <
             pallets[i].radius + pacman.radius) {
             score++;
+            liveScore.textContent = score.toString();
             pallets.splice(i, 1);
         }
     }

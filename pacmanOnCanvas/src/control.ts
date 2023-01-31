@@ -23,6 +23,7 @@ function animate() {
       pallets[i].radius + pacman.radius
     ) {
       score++;
+      liveScore.textContent = score.toString();
       pallets.splice(i, 1);
     }
   }
