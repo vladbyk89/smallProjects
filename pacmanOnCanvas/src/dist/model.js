@@ -34,6 +34,30 @@ var Pacman = /** @class */ (function () {
     };
     return Pacman;
 }());
+var Ghost = /** @class */ (function () {
+    function Ghost(_a, color) {
+        var position = _a.position, velocity = _a.velocity;
+        if (color === void 0) { color = 'pink'; }
+        this.color = color;
+        this.position = position;
+        this.velocity = velocity;
+        this.radius = squareSize / 2.2;
+        this.color = color;
+    }
+    Ghost.prototype.draw = function () {
+        ctx.beginPath();
+        ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+    };
+    Ghost.prototype.update = function () {
+        this.draw();
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+    };
+    return Ghost;
+}());
 var Pallet = /** @class */ (function () {
     function Pallet(_a) {
         var position = _a.position;
@@ -70,6 +94,7 @@ var keysPressed = {
 var boundries = [];
 var roads = [];
 var pallets = [];
+var ghosts = [];
 var pacman = new Pacman({
     position: {
         x: squareSize * 1.5,
