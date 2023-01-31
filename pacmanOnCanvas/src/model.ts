@@ -1,27 +1,19 @@
 const map = [
-  ["1", "-", "-", "-", "-", "-", "-", "-", "-", "-", "2"],
-  ["|", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"],
-  ["|", ".", "b", ".", "[", "7", "]", ".", "b", ".", "|"],
-  ["|", ".", ".", ".", ".", "_", ".", ".", ".", ".", "|"],
-  ["|", ".", "[", "]", ".", ".", ".", "[", "]", ".", "|"],
-  ["|", ".", ".", ".", ".", "^", ".", ".", ".", ".", "|"],
-  ["|", ".", "b", ".", "[", "+", "]", ".", "b", ".", "|"],
-  ["|", ".", ".", ".", ".", "_", ".", ".", ".", ".", "|"],
-  ["|", ".", "[", "]", ".", ".", ".", "[", "]", ".", "|"],
-  ["|", ".", ".", ".", ".", "^", ".", ".", ".", ".", "|"],
-  ["|", ".", "b", ".", "[", "5", "]", ".", "b", ".", "|"],
-  ["|", ".", ".", ".", ".", ".", ".", ".", ".", "p", "|"],
-  ["4", "-", "-", "-", "-", "-", "-", "-", "-", "-", "3"],
+  ["-", "-", "-", "-", "-", "-", "-"],
+  ["-", " ", " ", " ", " ", " ", "-"],
+  ["-", " ", "-", " ", "-", " ", "-"],
+  ["-", " ", " ", " ", " ", " ", "-"],
+  ["-", "-", "-", "-", "-", "-", "-"],
 ];
 
 class Pacman {
   public position: location;
   public velocity: location;
-  private radius: number;
+  public radius: number;
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
-    this.radius = 15;
+    this.radius = 18;
   }
 
   draw() {
@@ -31,17 +23,17 @@ class Pacman {
     ctx.fill();
     ctx.closePath();
   }
-  update(){
-    this.draw()
-    this.position.x += this.velocity.x
-    this.position.y += this.velocity.y
+  update() {
+    this.draw();
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
   }
 }
 
 class Boundary {
   static width = 40;
   static height = 40;
-  private position: location;
+  public position: location;
   constructor({ position }) {
     this.position = position;
   }
@@ -58,8 +50,27 @@ class Boundary {
 }
 
 const keysPressed = {
-    ArrowUp: false,
-    ArrowDown: false,
-    ArrowLeft: false,
-    ArrowRight: false
-}
+  ArrowUp: false,
+  ArrowDown: false,
+  ArrowLeft: false,
+  ArrowRight: false,
+};
+
+
+const boundries: Boundary[] = [];
+const pacman = new Pacman({
+  position: {
+    x: Boundary.width * 1.5,
+    y: Boundary.height * 1.5,
+  },
+  velocity: {
+    x: 0,
+    y: 0,
+  },
+});
+
+
+interface location {
+    x: number;
+    y: number;
+  }
