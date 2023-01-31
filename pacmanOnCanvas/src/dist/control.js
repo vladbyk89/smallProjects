@@ -20,6 +20,7 @@ function animate() {
             pacman.velocity.y = 0;
         }
     });
+    roads.forEach(function (road) { return road.draw(); });
     pacman.update();
     requestAnimationFrame(animate);
 }
@@ -28,14 +29,14 @@ function movePacman() {
         for (var i = 0; i < boundries.length; i++) {
             var boundry = boundries[i];
             if (isIntersect({
-                circle: __assign(__assign({}, pacman), { velocity: { x: -3, y: 0 } }),
+                circle: __assign(__assign({}, pacman), { velocity: { x: -pacmanSpeed, y: 0 } }),
                 square: boundry
             })) {
                 pacman.velocity.x = 0;
                 break;
             }
             else {
-                pacman.velocity.x = -3;
+                pacman.velocity.x = -pacmanSpeed;
             }
         }
     }
@@ -43,14 +44,14 @@ function movePacman() {
         for (var i = 0; i < boundries.length; i++) {
             var boundry = boundries[i];
             if (isIntersect({
-                circle: __assign(__assign({}, pacman), { velocity: { x: 3, y: 0 } }),
+                circle: __assign(__assign({}, pacman), { velocity: { x: pacmanSpeed, y: 0 } }),
                 square: boundry
             })) {
                 pacman.velocity.x = 0;
                 break;
             }
             else {
-                pacman.velocity.x = 3;
+                pacman.velocity.x = pacmanSpeed;
             }
         }
     }
@@ -58,14 +59,14 @@ function movePacman() {
         for (var i = 0; i < boundries.length; i++) {
             var boundry = boundries[i];
             if (isIntersect({
-                circle: __assign(__assign({}, pacman), { velocity: { x: 0, y: -3 } }),
+                circle: __assign(__assign({}, pacman), { velocity: { x: 0, y: -pacmanSpeed } }),
                 square: boundry
             })) {
                 pacman.velocity.y = 0;
                 break;
             }
             else {
-                pacman.velocity.y = -3;
+                pacman.velocity.y = -pacmanSpeed;
             }
         }
     }
@@ -73,14 +74,14 @@ function movePacman() {
         for (var i = 0; i < boundries.length; i++) {
             var boundry = boundries[i];
             if (isIntersect({
-                circle: __assign(__assign({}, pacman), { velocity: { x: 0, y: 3 } }),
+                circle: __assign(__assign({}, pacman), { velocity: { x: 0, y: pacmanSpeed } }),
                 square: boundry
             })) {
                 pacman.velocity.y = 0;
                 break;
             }
             else {
-                pacman.velocity.y = 3;
+                pacman.velocity.y = pacmanSpeed;
             }
         }
     }
@@ -91,10 +92,10 @@ function isIntersect(_a) {
     var circleBottomEdge = circle.position.y + circle.radius + circle.velocity.y;
     var circleLeftEdge = circle.position.x - circle.radius + circle.velocity.x;
     var circleRightEdge = circle.position.x + circle.radius + circle.velocity.x;
-    var squareBottomEdge = square.position.y + Boundary.height;
+    var squareBottomEdge = square.position.y + squareSize;
     var squareRightEdge = square.position.x;
     var squareTopEdge = square.position.y;
-    var squareLeftEdge = square.position.x + Boundary.width;
+    var squareLeftEdge = square.position.x + squareSize;
     return (circleTopEdge <= squareBottomEdge &&
         circleRightEdge >= squareRightEdge &&
         circleBottomEdge >= squareTopEdge &&

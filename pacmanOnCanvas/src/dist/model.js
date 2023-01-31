@@ -1,16 +1,18 @@
 var map = [
-    ["-", "-", "-", "-", "-", "-", "-"],
-    ["-", " ", " ", " ", " ", " ", "-"],
-    ["-", " ", "-", " ", "-", " ", "-"],
-    ["-", " ", " ", " ", " ", " ", "-"],
-    ["-", "-", "-", "-", "-", "-", "-"],
+    ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ['#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '#'],
+    ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+    ['#', '-', '-', '-', '-', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+    ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+    ['#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '#'],
+    ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
 ];
 var Pacman = /** @class */ (function () {
     function Pacman(_a) {
         var position = _a.position, velocity = _a.velocity;
         this.position = position;
         this.velocity = velocity;
-        this.radius = 18;
+        this.radius = squareSize / 2.12;
     }
     Pacman.prototype.draw = function () {
         ctx.beginPath();
@@ -29,14 +31,13 @@ var Pacman = /** @class */ (function () {
 var Boundary = /** @class */ (function () {
     function Boundary(_a) {
         var position = _a.position;
+        this.color = 'blue';
         this.position = position;
     }
     Boundary.prototype.draw = function () {
-        ctx.fillStyle = "blue";
-        ctx.fillRect(this.position.x, this.position.y, Boundary.width, Boundary.height);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.position.x, this.position.y, squareSize, squareSize);
     };
-    Boundary.width = 40;
-    Boundary.height = 40;
     return Boundary;
 }());
 var keysPressed = {
@@ -46,10 +47,11 @@ var keysPressed = {
     ArrowRight: false
 };
 var boundries = [];
+var roads = [];
 var pacman = new Pacman({
     position: {
-        x: Boundary.width * 1.5,
-        y: Boundary.height * 1.5
+        x: squareSize * 1.5,
+        y: squareSize * 1.5
     },
     velocity: {
         x: 0,

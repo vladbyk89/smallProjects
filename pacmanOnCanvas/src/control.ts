@@ -12,6 +12,8 @@ function animate() {
     }
   });
 
+  roads.forEach(road => road.draw())
+
   pacman.update();
 
   requestAnimationFrame(animate);
@@ -23,14 +25,14 @@ function movePacman() {
       const boundry = boundries[i];
       if (
         isIntersect({
-          circle: { ...pacman, velocity: { x: -3, y: 0 } },
+          circle: { ...pacman, velocity: { x: -pacmanSpeed, y: 0 } },
           square: boundry,
         })
       ) {
         pacman.velocity.x = 0;
         break;
       } else {
-        pacman.velocity.x = -3;
+        pacman.velocity.x = -pacmanSpeed;
       }
     }
   } else if (keysPressed.ArrowRight && lastKeyPressed == "ArrowRight") {
@@ -38,14 +40,14 @@ function movePacman() {
       const boundry = boundries[i];
       if (
         isIntersect({
-          circle: { ...pacman, velocity: { x: 3, y: 0 } },
+          circle: { ...pacman, velocity: { x: pacmanSpeed, y: 0 } },
           square: boundry,
         })
       ) {
         pacman.velocity.x = 0;
         break;
       } else {
-        pacman.velocity.x = 3;
+        pacman.velocity.x = pacmanSpeed;
       }
     }
   } else if (keysPressed.ArrowUp && lastKeyPressed == "ArrowUp") {
@@ -53,14 +55,14 @@ function movePacman() {
       const boundry = boundries[i];
       if (
         isIntersect({
-          circle: { ...pacman, velocity: { x: 0, y: -3 } },
+          circle: { ...pacman, velocity: { x: 0, y: -pacmanSpeed } },
           square: boundry,
         })
       ) {
         pacman.velocity.y = 0;
         break;
       } else {
-        pacman.velocity.y = -3;
+        pacman.velocity.y = -pacmanSpeed;
       }
     }
   } else if (keysPressed.ArrowDown && lastKeyPressed == "ArrowDown") {
@@ -68,14 +70,14 @@ function movePacman() {
       const boundry = boundries[i];
       if (
         isIntersect({
-          circle: { ...pacman, velocity: { x: 0, y: 3 } },
+          circle: { ...pacman, velocity: { x: 0, y: pacmanSpeed } },
           square: boundry,
         })
       ) {
         pacman.velocity.y = 0;
         break;
       } else {
-        pacman.velocity.y = 3;
+        pacman.velocity.y = pacmanSpeed;
       }
     }
   }
@@ -87,10 +89,10 @@ function isIntersect({ circle, square }) {
     circle.position.y + circle.radius + circle.velocity.y;
   const circleLeftEdge = circle.position.x - circle.radius + circle.velocity.x;
   const circleRightEdge = circle.position.x + circle.radius + circle.velocity.x;
-  const squareBottomEdge = square.position.y + Boundary.height;
+  const squareBottomEdge = square.position.y + squareSize;
   const squareRightEdge = square.position.x;
   const squareTopEdge = square.position.y;
-  const squareLeftEdge = square.position.x + Boundary.width;
+  const squareLeftEdge = square.position.x + squareSize;
 
   return (
     circleTopEdge <= squareBottomEdge &&
