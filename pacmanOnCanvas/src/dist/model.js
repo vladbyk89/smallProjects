@@ -5,6 +5,13 @@ var map = [
     ['#', '-', '-', '-', '-', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
     ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
     ['#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '#'],
+    ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+    ['#', '-', '-', '-', '-', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+    ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+    ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+    ['#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '#'],
+    ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+    ['#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '#'],
     ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
 ];
 var Pacman = /** @class */ (function () {
@@ -12,7 +19,7 @@ var Pacman = /** @class */ (function () {
         var position = _a.position, velocity = _a.velocity;
         this.position = position;
         this.velocity = velocity;
-        this.radius = squareSize / 2.12;
+        this.radius = squareSize / 2.2;
     }
     Pacman.prototype.draw = function () {
         ctx.beginPath();
@@ -27,6 +34,21 @@ var Pacman = /** @class */ (function () {
         this.position.y += this.velocity.y;
     };
     return Pacman;
+}());
+var Pallet = /** @class */ (function () {
+    function Pallet(_a) {
+        var position = _a.position;
+        this.position = position;
+        this.radius = squareSize / 10;
+    }
+    Pallet.prototype.draw = function () {
+        ctx.beginPath();
+        ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "orange";
+        ctx.fill();
+        ctx.closePath();
+    };
+    return Pallet;
 }());
 var Boundary = /** @class */ (function () {
     function Boundary(_a) {
@@ -48,6 +70,7 @@ var keysPressed = {
 };
 var boundries = [];
 var roads = [];
+var pallets = [];
 var pacman = new Pacman({
     position: {
         x: squareSize * 1.5,

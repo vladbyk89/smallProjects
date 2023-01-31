@@ -4,8 +4,9 @@ const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 canvas.width = innerHeight - 50;
 canvas.height = innerHeight - 50;
 
+let score:number = 0;
 let lastKeyPressed: string;
-const pacmanSpeed: number = 3;
+const pacmanSpeed: number = 5;
 const squareSize = canvas.width / 14;
 
 function createMaze(maze: string[][]) {
@@ -21,17 +22,16 @@ function createMaze(maze: string[][]) {
           });
           boundries.push(boundry);
           break;
-        case "!":
-          const road = new Boundary(
+        case "-":
+          const pallet = new Pallet(
             new Boundary({
               position: {
-                x: squareSize * j,
-                y: squareSize * i,
+                x: squareSize * j + squareSize / 2,
+                y: squareSize * i + squareSize / 2,
               },
             })
           );
-          road.color = "red";
-          roads.push(road);
+          pallets.push(pallet);
           break;
       }
     });

@@ -2,8 +2,9 @@ var canvas = document.querySelector(".playGround");
 var ctx = canvas.getContext("2d");
 canvas.width = innerHeight - 50;
 canvas.height = innerHeight - 50;
+var score = 0;
 var lastKeyPressed;
-var pacmanSpeed = 3;
+var pacmanSpeed = 5;
 var squareSize = canvas.width / 14;
 function createMaze(maze) {
     maze.forEach(function (row, i) {
@@ -18,15 +19,14 @@ function createMaze(maze) {
                     });
                     boundries.push(boundry);
                     break;
-                case "!":
-                    var road = new Boundary(new Boundary({
+                case "-":
+                    var pallet = new Pallet(new Boundary({
                         position: {
-                            x: squareSize * j,
-                            y: squareSize * i
+                            x: squareSize * j + squareSize / 2,
+                            y: squareSize * i + squareSize / 2
                         }
                     }));
-                    road.color = "red";
-                    roads.push(road);
+                    pallets.push(pallet);
                     break;
             }
         });

@@ -12,10 +12,22 @@ function animate() {
     }
   });
 
-  roads.forEach(road => road.draw())
+  // reverse loop to avoide pallet flashing
+  for (let i = pallets.length - 1; i > 0; i--) {
+    pallets[i].draw();
+    if (
+      Math.hypot(
+        pallets[i].position.x - pacman.position.x,
+        pallets[i].position.y - pacman.position.y
+      ) <
+      pallets[i].radius + pacman.radius
+    ) {
+      score++;
+      pallets.splice(i, 1);
+    }
+  }
 
   pacman.update();
-
   requestAnimationFrame(animate);
 }
 

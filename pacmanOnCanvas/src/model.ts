@@ -5,6 +5,13 @@ const map = [
   ['#', '-', '-', '-', '-', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
   ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
   ['#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '#'],
+  ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+  ['#', '-', '-', '-', '-', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+  ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+  ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+  ['#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '#'],
+  ['#', '-', '#', '-', '#', '-', '#', '#', '#', '#', '#', '#', '-', '#'],
+  ['#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '#'],
   ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
 ];
 
@@ -15,7 +22,7 @@ class Pacman {
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
-    this.radius = squareSize / 2.12;
+    this.radius = squareSize / 2.2;
   }
 
   draw() {
@@ -29,6 +36,21 @@ class Pacman {
     this.draw();
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
+  }
+}
+class Pallet {
+  public position: location;
+  public radius: number;
+  constructor({ position }) {
+    this.position = position;
+    this.radius = squareSize / 10;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "orange";
+    ctx.fill();
+    ctx.closePath();
   }
 }
 
@@ -62,6 +84,7 @@ const keysPressed = {
 
 const boundries: Boundary[] = [];
 const roads: Boundary[] = [];
+const pallets: Pallet[] = [];
 
 const pacman = new Pacman({
   position: {
