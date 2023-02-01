@@ -1,11 +1,11 @@
 var canvas = document.querySelector(".playGround");
 var ctx = canvas.getContext("2d");
-canvas.width = innerHeight - 50;
 canvas.height = innerHeight - 50;
+canvas.width = canvas.height;
 var liveScore = document.querySelector('.liveScore');
 var score = 0;
 var lastKeyPressed;
-var pacmanSpeed = 5;
+var pacmanSpeed = 3;
 var ghostSpeed = 5;
 var squareSize = canvas.width / 13;
 function createMaze(maze) {
@@ -13,21 +13,11 @@ function createMaze(maze) {
         row.forEach(function (symbol, j) {
             switch (symbol) {
                 case "#":
-                    var boundry = new Boundary({
-                        position: {
-                            x: squareSize * j,
-                            y: squareSize * i
-                        }
-                    });
-                    boundries.push(boundry);
+                    var boundry = new Wall(squareSize * j, squareSize * i);
+                    walls.push(boundry);
                     break;
                 case ".":
-                    var pallet = new Pallet(new Boundary({
-                        position: {
-                            x: squareSize * j + squareSize / 2,
-                            y: squareSize * i + squareSize / 2
-                        }
-                    }));
+                    var pallet = new Pallet(squareSize * j + squareSize / 2, squareSize * i + squareSize / 2);
                     pallets.push(pallet);
                     break;
             }

@@ -15,80 +15,78 @@ const map = [
 ];
 
 class Pacman {
-  public position: location;
-  public velocity: location;
   public radius: number;
-  constructor({ position, velocity }) {
-    this.position = position;
-    this.velocity = velocity;
-    this.radius = squareSize / 2.2;
+  constructor(
+    public lastX: number,
+    public lastY: number,
+    public velocityX: number,
+    public velocityY: number
+  ) {
+    this.radius = squareSize / 2.1;
   }
 
   draw() {
     ctx.beginPath();
-    ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
+    ctx.arc(this.lastX, this.lastY, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = "yellow";
     ctx.fill();
     ctx.closePath();
   }
   update() {
     this.draw();
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
+    this.lastX += this.velocityX;
+    this.lastY += this.velocityY;
   }
 }
 class Ghost {
-  public position: location;
-  public velocity: location;
   public radius: number;
   public prevCollisions: string[];
-  constructor({ position, velocity }, public color: string = "pink") {
-    this.position = position;
-    this.velocity = velocity;
+  constructor(
+    public lastX: number,
+    public lastY: number,
+    public velocityX: number,
+    public velocityY: number,
+    public color: string = "pink"
+  ) {
     this.radius = squareSize / 2.2;
     this.color = color;
-    this.prevCollisions = []
+    this.prevCollisions = [];
   }
 
   draw() {
     ctx.beginPath();
-    ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
+    ctx.arc(this.lastX, this.lastY, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
   }
   update() {
     this.draw();
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
+    this.lastX += this.velocityX;
+    this.lastY += this.velocityY;
   }
 }
 class Pallet {
-  public position: location;
   public radius: number;
-  constructor({ position }) {
-    this.position = position;
+  constructor(public lastX: number, public lastY: number) {
     this.radius = squareSize / 10;
   }
   draw() {
     ctx.beginPath();
-    ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
+    ctx.arc(this.lastX, this.lastY, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = "orange";
     ctx.fill();
     ctx.closePath();
   }
 }
 
-class Boundary {
-  public position: location;
+class Wall {
   public color: string = "blue";
-  constructor({ position }) {
-    this.position = position;
-  }
+  constructor(public lastX: number, public lastY: number) {}
 
   draw() {
     ctx.fillStyle = this.color;
-    ctx.fillRect(this.position.x, this.position.y, squareSize, squareSize);
+    ctx.fillRect(this.lastX, this.lastY, squareSize, squareSize);
   }
 }
 
@@ -99,7 +97,7 @@ const keysPressed = {
   ArrowRight: false,
 };
 
-const boundries: Boundary[] = [];
+const walls: Wall[] = [];
 const pallets: Pallet[] = [];
 const ghosts: Ghost[] = [
   // new Ghost({
@@ -140,22 +138,9 @@ const ghosts: Ghost[] = [
   //   velocity: {
   //     x: 0,
   //     y: 0,
-  //   }, 
+  //   },
   // }, 'purple')
 ];
 
-const pacman = new Pacman({
-  position: {
-    x: squareSize * 1.5,
-    y: squareSize * 1.5,
-  },
-  velocity: {
-    x: 0,
-    y: 0,
-  },
-});
+const pacman = new Pacman(squareSize * 1.5, squareSize * 1.5, 0, 0);
 
-interface location {
-  x: number;
-  y: number;
-}

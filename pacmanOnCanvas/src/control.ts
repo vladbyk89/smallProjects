@@ -3,41 +3,20 @@ function animate() {
 
   movePacman();
 
-  boundries.forEach((boundry) => {
-    boundry.draw();
-    if (isIntersect({ circle: pacman, square: boundry })) {
-      console.log("Collision");
-      pacman.velocity.x = 0;
-      pacman.velocity.y = 0;
-    }
-  });
+  detectWallCollision();
 
-  // reverse loop to avoide pallet flashing
-  for (let i = pallets.length - 1; i > 0; i--) {
-    pallets[i].draw();
-    if (
-      Math.hypot(
-        pallets[i].position.x - pacman.position.x,
-        pallets[i].position.y - pacman.position.y
-      ) <
-      pallets[i].radius + pacman.radius
-    ) {
-      score++;
-      liveScore.textContent = score.toString();
-      pallets.splice(i, 1);
-    }
-  }
+  detectPallet();
 
   ghosts.forEach((ghost) => {
     ghost.update();
 
     const collisions: string[] = [];
-    boundries.forEach((boundry) => {
+    walls.forEach((wall) => {
       if (
         !collisions.includes("right") &&
         isIntersect({
           circle: { ...ghost, velocity: { x: 5, y: 0 } },
-          square: boundry,
+          square: wall,
         })
       ) {
         collisions.push("right");
@@ -46,7 +25,7 @@ function animate() {
         !collisions.includes("left") &&
         isIntersect({
           circle: { ...ghost, velocity: { x: -5, y: 0 } },
-          square: boundry,
+          square: wall,
         })
       ) {
         collisions.push("left");
@@ -55,7 +34,7 @@ function animate() {
         !collisions.includes("up") &&
         isIntersect({
           circle: { ...ghost, velocity: { x: 0, y: -5 } },
-          square: boundry,
+          square: wall,
         })
       ) {
         collisions.push("up");
@@ -64,7 +43,7 @@ function animate() {
         !collisions.includes("down") &&
         isIntersect({
           circle: { ...ghost, velocity: { x: 0, y: 5 } },
-          square: boundry,
+          square: wall,
         })
       ) {
         collisions.push("down");
@@ -75,10 +54,10 @@ function animate() {
       }
 
       if (JSON.stringify(collisions) == JSON.stringify(ghost.prevCollisions)) {
-        if (ghost.velocity.x > 0) ghost.prevCollisions.push("right");
-        else if (ghost.velocity.x < 0) ghost.prevCollisions.push("left");
-        else if (ghost.velocity.y < 0) ghost.prevCollisions.push("up");
-        else if (ghost.velocity.y > 0) ghost.prevCollisions.push("down");
+        if (ghost.velocityX > 0) ghost.prevCollisions.push("right");
+        else if (ghost.velocityX < 0) ghost.prevCollisions.push("left");
+        else if (ghost.velocityY < 0) ghost.prevCollisions.push("up");
+        else if (ghost.velocityY > 0) ghost.prevCollisions.push("down");
 
         const pathways = ghost.prevCollisions.filter((collision) => {
           return !collisions.includes(collision);
@@ -99,78 +78,77 @@ function animate() {
 
 function movePacman() {
   if (keysPressed.ArrowLeft && lastKeyPressed == "ArrowLeft") {
-    for (let i = 0; i < boundries.length; i++) {
-      const boundry = boundries[i];
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
       if (
         isIntersect({
-          circle: { ...pacman, velocity: { x: -pacmanSpeed, y: 0 } },
-          square: boundry,
+          circle: { ...pacman, velocityX: -pacmanSpeed },
+          square: wall,
         })
       ) {
-        pacman.velocity.x = 0;
+        pacman.velocityX = 0;
         break;
       } else {
-        pacman.velocity.x = -pacmanSpeed;
+        pacman.velocityX = -pacmanSpeed;
       }
     }
   } else if (keysPressed.ArrowRight && lastKeyPressed == "ArrowRight") {
-    for (let i = 0; i < boundries.length; i++) {
-      const boundry = boundries[i];
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
       if (
         isIntersect({
-          circle: { ...pacman, velocity: { x: pacmanSpeed, y: 0 } },
-          square: boundry,
+          circle: { ...pacman, velocityX: pacmanSpeed },
+          square: wall,
         })
       ) {
-        pacman.velocity.x = 0;
+        pacman.velocityX = 0;
         break;
       } else {
-        pacman.velocity.x = pacmanSpeed;
+        pacman.velocityX = pacmanSpeed;
       }
     }
   } else if (keysPressed.ArrowUp && lastKeyPressed == "ArrowUp") {
-    for (let i = 0; i < boundries.length; i++) {
-      const boundry = boundries[i];
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
       if (
         isIntersect({
-          circle: { ...pacman, velocity: { x: 0, y: -pacmanSpeed } },
-          square: boundry,
+          circle: { ...pacman, velocityY: -pacmanSpeed },
+          square: wall,
         })
       ) {
-        pacman.velocity.y = 0;
+        pacman.velocityY = 0;
         break;
       } else {
-        pacman.velocity.y = -pacmanSpeed;
+        pacman.velocityY = -pacmanSpeed;
       }
     }
   } else if (keysPressed.ArrowDown && lastKeyPressed == "ArrowDown") {
-    for (let i = 0; i < boundries.length; i++) {
-      const boundry = boundries[i];
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
       if (
         isIntersect({
-          circle: { ...pacman, velocity: { x: 0, y: pacmanSpeed } },
-          square: boundry,
+          circle: { ...pacman, velocityY: pacmanSpeed },
+          square: wall,
         })
       ) {
-        pacman.velocity.y = 0;
+        pacman.velocityY = 0;
         break;
       } else {
-        pacman.velocity.y = pacmanSpeed;
+        pacman.velocityY = pacmanSpeed;
       }
     }
   }
 }
 
 function isIntersect({ circle, square }) {
-  const circleTopEdge = circle.position.y - circle.radius + circle.velocity.y;
-  const circleBottomEdge =
-    circle.position.y + circle.radius + circle.velocity.y;
-  const circleLeftEdge = circle.position.x - circle.radius + circle.velocity.x;
-  const circleRightEdge = circle.position.x + circle.radius + circle.velocity.x;
-  const squareBottomEdge = square.position.y + squareSize;
-  const squareRightEdge = square.position.x;
-  const squareTopEdge = square.position.y;
-  const squareLeftEdge = square.position.x + squareSize;
+  const circleTopEdge = circle.lastY - circle.radius + circle.velocityY;
+  const circleBottomEdge = circle.lastY + circle.radius + circle.velocityY;
+  const circleLeftEdge = circle.lastX - circle.radius + circle.velocityX;
+  const circleRightEdge = circle.lastX + circle.radius + circle.velocityX;
+  const squareBottomEdge = square.lastY + squareSize;
+  const squareRightEdge = square.lastX;
+  const squareTopEdge = square.lastY;
+  const squareLeftEdge = square.lastX + squareSize;
 
   return (
     circleTopEdge <= squareBottomEdge &&
