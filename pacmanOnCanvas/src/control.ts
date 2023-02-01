@@ -28,9 +28,70 @@ function animate() {
     }
   }
 
-  ghosts.forEach(ghost => {
-    ghost.draw();
-  })
+  ghosts.forEach((ghost) => {
+    ghost.update();
+
+    const collisions: string[] = [];
+    boundries.forEach((boundry) => {
+      if (
+        !collisions.includes("right") &&
+        isIntersect({
+          circle: { ...ghost, velocity: { x: 5, y: 0 } },
+          square: boundry,
+        })
+      ) {
+        collisions.push("right");
+      }
+      if (
+        !collisions.includes("left") &&
+        isIntersect({
+          circle: { ...ghost, velocity: { x: -5, y: 0 } },
+          square: boundry,
+        })
+      ) {
+        collisions.push("left");
+      }
+      if (
+        !collisions.includes("up") &&
+        isIntersect({
+          circle: { ...ghost, velocity: { x: 0, y: -5 } },
+          square: boundry,
+        })
+      ) {
+        collisions.push("up");
+      }
+      if (
+        !collisions.includes("down") &&
+        isIntersect({
+          circle: { ...ghost, velocity: { x: 0, y: 5 } },
+          square: boundry,
+        })
+      ) {
+        collisions.push("down");
+      }
+      console.log(collisions)
+      if (collisions.length > ghost.prevCollisions.length) {
+        ghost.prevCollisions = collisions;
+      }
+
+      if (JSON.stringify(collisions) == JSON.stringify(ghost.prevCollisions)) {
+        if (ghost.velocity.x > 0) ghost.prevCollisions.push("right");
+        else if (ghost.velocity.x < 0) ghost.prevCollisions.push("left");
+        else if (ghost.velocity.y < 0) ghost.prevCollisions.push("up");
+        else if (ghost.velocity.y > 0) ghost.prevCollisions.push("down");
+
+        const pathways = ghost.prevCollisions.filter((collision) => {
+          return !collisions.includes(collision);
+        });
+
+        // console.log({ pathways });
+
+        const direction = pathways[Math.floor(Math.random() * pathways.length)];
+
+        console.log(direction);
+      }
+    });
+  });
 
   pacman.update();
   requestAnimationFrame(animate);

@@ -6,6 +6,7 @@ var liveScore = document.querySelector('.liveScore');
 var score = 0;
 var lastKeyPressed;
 var pacmanSpeed = 5;
+var ghostSpeed = 5;
 var squareSize = canvas.width / 13;
 function createMaze(maze) {
     maze.forEach(function (row, i) {

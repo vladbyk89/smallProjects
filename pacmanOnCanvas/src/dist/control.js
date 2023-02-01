@@ -31,7 +31,58 @@ function animate() {
         }
     }
     ghosts.forEach(function (ghost) {
-        ghost.draw();
+        ghost.update();
+        var collisions = [];
+        boundries.forEach(function (boundry) {
+            if (!collisions.includes("right") &&
+                isIntersect({
+                    circle: __assign(__assign({}, ghost), { velocity: { x: 5, y: 0 } }),
+                    square: boundry
+                })) {
+                collisions.push("right");
+            }
+            if (!collisions.includes("left") &&
+                isIntersect({
+                    circle: __assign(__assign({}, ghost), { velocity: { x: -5, y: 0 } }),
+                    square: boundry
+                })) {
+                collisions.push("left");
+            }
+            if (!collisions.includes("up") &&
+                isIntersect({
+                    circle: __assign(__assign({}, ghost), { velocity: { x: 0, y: -5 } }),
+                    square: boundry
+                })) {
+                collisions.push("up");
+            }
+            if (!collisions.includes("down") &&
+                isIntersect({
+                    circle: __assign(__assign({}, ghost), { velocity: { x: 0, y: 5 } }),
+                    square: boundry
+                })) {
+                collisions.push("down");
+            }
+            console.log(collisions);
+            if (collisions.length > ghost.prevCollisions.length) {
+                ghost.prevCollisions = collisions;
+            }
+            if (JSON.stringify(collisions) == JSON.stringify(ghost.prevCollisions)) {
+                if (ghost.velocity.x > 0)
+                    ghost.prevCollisions.push("right");
+                else if (ghost.velocity.x < 0)
+                    ghost.prevCollisions.push("left");
+                else if (ghost.velocity.y < 0)
+                    ghost.prevCollisions.push("up");
+                else if (ghost.velocity.y > 0)
+                    ghost.prevCollisions.push("down");
+                var pathways = ghost.prevCollisions.filter(function (collision) {
+                    return !collisions.includes(collision);
+                });
+                // console.log({ pathways });
+                var direction = pathways[Math.floor(Math.random() * pathways.length)];
+                console.log(direction);
+            }
+        });
     });
     pacman.update();
     requestAnimationFrame(animate);

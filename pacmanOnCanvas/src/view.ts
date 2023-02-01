@@ -8,6 +8,7 @@ const liveScore = document.querySelector('.liveScore') as HTMLSpanElement;
 let score:number = 0;
 let lastKeyPressed: string;
 const pacmanSpeed: number = 5;
+const ghostSpeed:number = 5;
 const squareSize = canvas.width / 13;
 
 function createMaze(maze: string[][]) {

@@ -41,11 +41,13 @@ class Ghost {
   public position: location;
   public velocity: location;
   public radius: number;
+  public prevCollisions: string[];
   constructor({ position, velocity }, public color: string = "pink") {
     this.position = position;
     this.velocity = velocity;
     this.radius = squareSize / 2.2;
     this.color = color;
+    this.prevCollisions = []
   }
 
   draw() {
@@ -98,49 +100,48 @@ const keysPressed = {
 };
 
 const boundries: Boundary[] = [];
-const roads: Boundary[] = [];
 const pallets: Pallet[] = [];
 const ghosts: Ghost[] = [
   new Ghost({
     position: {
-      x: squareSize * 5.5,
-      y: squareSize * 5.5,
+      x: squareSize * 7.5,
+      y: squareSize * 1.5,
     },
     velocity: {
-      x: 0,
+      x: ghostSpeed,
       y: 0,
     },
   }),
-  new Ghost({
-    position: {
-      x: squareSize * 7.5,
-      y: squareSize * 5.5,
-    },
-    velocity: {
-      x: 0,
-      y: 0,
-    },
-  }, 'orange'),
-  new Ghost({
-    position: {
-      x: squareSize * 5.5,
-      y: squareSize * 7.5,
-    },
-    velocity: {
-      x: 0,
-      y: 0,
-    },
-  }, 'red'),
-  new Ghost({
-    position: {
-      x: squareSize * 7.5,
-      y: squareSize * 7.5,
-    },
-    velocity: {
-      x: 0,
-      y: 0,
-    }, 
-  }, 'purple')
+  // new Ghost({
+  //   position: {
+  //     x: squareSize * 7.5,
+  //     y: squareSize * 5.5,
+  //   },
+  //   velocity: {
+  //     x: 0,
+  //     y: 0,
+  //   },
+  // }, 'orange'),
+  // new Ghost({
+  //   position: {
+  //     x: squareSize * 5.5,
+  //     y: squareSize * 7.5,
+  //   },
+  //   velocity: {
+  //     x: 0,
+  //     y: 0,
+  //   },
+  // }, 'red'),
+  // new Ghost({
+  //   position: {
+  //     x: squareSize * 7.5,
+  //     y: squareSize * 7.5,
+  //   },
+  //   velocity: {
+  //     x: 0,
+  //     y: 0,
+  //   }, 
+  // }, 'purple')
 ];
 
 const pacman = new Pacman({

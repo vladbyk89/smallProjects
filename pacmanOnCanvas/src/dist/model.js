@@ -43,6 +43,7 @@ var Ghost = /** @class */ (function () {
         this.velocity = velocity;
         this.radius = squareSize / 2.2;
         this.color = color;
+        this.prevCollisions = [];
     }
     Ghost.prototype.draw = function () {
         ctx.beginPath();
@@ -92,49 +93,18 @@ var keysPressed = {
     ArrowRight: false
 };
 var boundries = [];
-var roads = [];
 var pallets = [];
 var ghosts = [
     new Ghost({
         position: {
-            x: squareSize * 5.5,
-            y: squareSize * 5.5
+            x: squareSize * 7.5,
+            y: squareSize * 1.5
         },
         velocity: {
-            x: 0,
+            x: ghostSpeed,
             y: 0
         }
     }),
-    new Ghost({
-        position: {
-            x: squareSize * 7.5,
-            y: squareSize * 5.5
-        },
-        velocity: {
-            x: 0,
-            y: 0
-        }
-    }, 'orange'),
-    new Ghost({
-        position: {
-            x: squareSize * 5.5,
-            y: squareSize * 7.5
-        },
-        velocity: {
-            x: 0,
-            y: 0
-        }
-    }, 'red'),
-    new Ghost({
-        position: {
-            x: squareSize * 7.5,
-            y: squareSize * 7.5
-        },
-        velocity: {
-            x: 0,
-            y: 0
-        }
-    }, 'purple')
 ];
 var pacman = new Pacman({
     position: {
