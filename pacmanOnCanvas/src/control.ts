@@ -10,66 +10,66 @@ function animate() {
   ghosts.forEach((ghost) => {
     ghost.update();
 
-    const collisions: string[] = [];
-    walls.forEach((wall) => {
-      if (
-        !collisions.includes("right") &&
-        isIntersect({
-          circle: { ...ghost, velocity: { x: 5, y: 0 } },
-          square: wall,
-        })
-      ) {
-        collisions.push("right");
-      }
-      if (
-        !collisions.includes("left") &&
-        isIntersect({
-          circle: { ...ghost, velocity: { x: -5, y: 0 } },
-          square: wall,
-        })
-      ) {
-        collisions.push("left");
-      }
-      if (
-        !collisions.includes("up") &&
-        isIntersect({
-          circle: { ...ghost, velocity: { x: 0, y: -5 } },
-          square: wall,
-        })
-      ) {
-        collisions.push("up");
-      }
-      if (
-        !collisions.includes("down") &&
-        isIntersect({
-          circle: { ...ghost, velocity: { x: 0, y: 5 } },
-          square: wall,
-        })
-      ) {
-        collisions.push("down");
-      }
-      // console.log(collisions)
-      if (collisions.length > ghost.prevCollisions.length) {
-        ghost.prevCollisions = collisions;
-      }
+    // const collisions: string[] = [];
+    // walls.forEach((wall) => {
+    //   if (
+    //     !collisions.includes("right") &&
+    //     isIntersect({
+    //       circle: { ...ghost, velocity: { x: 5, y: 0 } },
+    //       square: wall,
+    //     })
+    //   ) {
+    //     collisions.push("right");
+    //   }
+    //   if (
+    //     !collisions.includes("left") &&
+    //     isIntersect({
+    //       circle: { ...ghost, velocity: { x: -5, y: 0 } },
+    //       square: wall,
+    //     })
+    //   ) {
+    //     collisions.push("left");
+    //   }
+    //   if (
+    //     !collisions.includes("up") &&
+    //     isIntersect({
+    //       circle: { ...ghost, velocity: { x: 0, y: -5 } },
+    //       square: wall,
+    //     })
+    //   ) {
+    //     collisions.push("up");
+    //   }
+    //   if (
+    //     !collisions.includes("down") &&
+    //     isIntersect({
+    //       circle: { ...ghost, velocity: { x: 0, y: 5 } },
+    //       square: wall,
+    //     })
+    //   ) {
+    //     collisions.push("down");
+    //   }
+    //   // console.log(collisions)
+    //   if (collisions.length > ghost.prevCollisions.length) {
+    //     ghost.prevCollisions = collisions;
+    //   }
 
-      if (JSON.stringify(collisions) == JSON.stringify(ghost.prevCollisions)) {
-        if (ghost.velocityX > 0) ghost.prevCollisions.push("right");
-        else if (ghost.velocityX < 0) ghost.prevCollisions.push("left");
-        else if (ghost.velocityY < 0) ghost.prevCollisions.push("up");
-        else if (ghost.velocityY > 0) ghost.prevCollisions.push("down");
+    //   if (JSON.stringify(collisions) == JSON.stringify(ghost.prevCollisions)) {
+    //     if (ghost.velocityX > 0) ghost.prevCollisions.push("right");
+    //     else if (ghost.velocityX < 0) ghost.prevCollisions.push("left");
+    //     else if (ghost.velocityY < 0) ghost.prevCollisions.push("up");
+    //     else if (ghost.velocityY > 0) ghost.prevCollisions.push("down");
 
-        const pathways = ghost.prevCollisions.filter((collision) => {
-          return !collisions.includes(collision);
-        });
+    //     const pathways = ghost.prevCollisions.filter((collision) => {
+    //       return !collisions.includes(collision);
+    //     });
 
-        // console.log({ pathways });
+    //     // console.log({ pathways });
 
-        const direction = pathways[Math.floor(Math.random() * pathways.length)];
+    //     const direction = pathways[Math.floor(Math.random() * pathways.length)];
 
-        // console.log(direction);
-      }
-    });
+    //     // console.log(direction);
+    //   }
+    // });
   });
 
   pacman.update();

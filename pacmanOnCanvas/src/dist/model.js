@@ -13,6 +13,12 @@ var map = [
     ["#", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "#"],
     ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"],
 ];
+var keysPressed = {
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false
+};
 var Pacman = /** @class */ (function () {
     function Pacman(lastX, lastY, velocityX, velocityY) {
         this.lastX = lastX;
@@ -35,6 +41,36 @@ var Pacman = /** @class */ (function () {
     };
     return Pacman;
 }());
+var pacman = new Pacman(squareSize * 1.5, squareSize * 1.5, 0, 0);
+var Pallet = /** @class */ (function () {
+    function Pallet(lastX, lastY) {
+        this.lastX = lastX;
+        this.lastY = lastY;
+        this.radius = squareSize / 10;
+    }
+    Pallet.prototype.draw = function () {
+        ctx.beginPath();
+        ctx.arc(this.lastX, this.lastY, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "orange";
+        ctx.fill();
+        ctx.closePath();
+    };
+    return Pallet;
+}());
+var pallets = [];
+var Wall = /** @class */ (function () {
+    function Wall(lastX, lastY) {
+        this.lastX = lastX;
+        this.lastY = lastY;
+        this.color = "blue";
+    }
+    Wall.prototype.draw = function () {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.lastX, this.lastY, squareSize, squareSize);
+    };
+    return Wall;
+}());
+var walls = [];
 var Ghost = /** @class */ (function () {
     function Ghost(lastX, lastY, velocityX, velocityY, color) {
         if (color === void 0) { color = "pink"; }
@@ -61,81 +97,6 @@ var Ghost = /** @class */ (function () {
     };
     return Ghost;
 }());
-var Pallet = /** @class */ (function () {
-    function Pallet(lastX, lastY) {
-        this.lastX = lastX;
-        this.lastY = lastY;
-        this.radius = squareSize / 10;
-    }
-    Pallet.prototype.draw = function () {
-        ctx.beginPath();
-        ctx.arc(this.lastX, this.lastY, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "orange";
-        ctx.fill();
-        ctx.closePath();
-    };
-    return Pallet;
-}());
-var Wall = /** @class */ (function () {
-    function Wall(lastX, lastY) {
-        this.lastX = lastX;
-        this.lastY = lastY;
-        this.color = "blue";
-    }
-    Wall.prototype.draw = function () {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.lastX, this.lastY, squareSize, squareSize);
-    };
-    return Wall;
-}());
-var keysPressed = {
-    ArrowUp: false,
-    ArrowDown: false,
-    ArrowLeft: false,
-    ArrowRight: false
-};
-var walls = [];
-var pallets = [];
 var ghosts = [
-// new Ghost({
-//   position: {
-//     x: squareSize * 7.5,
-//     y: squareSize * 1.5,
-//   },
-//   velocity: {
-//     x: ghostSpeed,
-//     y: 0,
-//   },
-// }),
-// new Ghost({
-//   position: {
-//     x: squareSize * 7.5,
-//     y: squareSize * 5.5,
-//   },
-//   velocity: {
-//     x: 0,
-//     y: 0,
-//   },
-// }, 'orange'),
-// new Ghost({
-//   position: {
-//     x: squareSize * 5.5,
-//     y: squareSize * 7.5,
-//   },
-//   velocity: {
-//     x: 0,
-//     y: 0,
-//   },
-// }, 'red'),
-// new Ghost({
-//   position: {
-//     x: squareSize * 7.5,
-//     y: squareSize * 7.5,
-//   },
-//   velocity: {
-//     x: 0,
-//     y: 0,
-//   },
-// }, 'purple')
+    new Ghost(squareSize * 7.5, squareSize * 7.5, ghostSpeed, 0),
 ];
-var pacman = new Pacman(squareSize * 1.5, squareSize * 1.5, 0, 0);
