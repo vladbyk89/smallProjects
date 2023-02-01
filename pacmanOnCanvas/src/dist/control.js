@@ -62,7 +62,7 @@ function animate() {
                 })) {
                 collisions.push("down");
             }
-            console.log(collisions);
+            // console.log(collisions)
             if (collisions.length > ghost.prevCollisions.length) {
                 ghost.prevCollisions = collisions;
             }
@@ -80,7 +80,7 @@ function animate() {
                 });
                 // console.log({ pathways });
                 var direction = pathways[Math.floor(Math.random() * pathways.length)];
-                console.log(direction);
+                // console.log(direction);
             }
         });
     });

@@ -102,16 +102,16 @@ const keysPressed = {
 const boundries: Boundary[] = [];
 const pallets: Pallet[] = [];
 const ghosts: Ghost[] = [
-  new Ghost({
-    position: {
-      x: squareSize * 7.5,
-      y: squareSize * 1.5,
-    },
-    velocity: {
-      x: ghostSpeed,
-      y: 0,
-    },
-  }),
+  // new Ghost({
+  //   position: {
+  //     x: squareSize * 7.5,
+  //     y: squareSize * 1.5,
+  //   },
+  //   velocity: {
+  //     x: ghostSpeed,
+  //     y: 0,
+  //   },
+  // }),
   // new Ghost({
   //   position: {
   //     x: squareSize * 7.5,

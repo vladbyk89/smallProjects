@@ -95,16 +95,46 @@ var keysPressed = {
 var boundries = [];
 var pallets = [];
 var ghosts = [
-    new Ghost({
-        position: {
-            x: squareSize * 7.5,
-            y: squareSize * 1.5
-        },
-        velocity: {
-            x: ghostSpeed,
-            y: 0
-        }
-    }),
+// new Ghost({
+//   position: {
+//     x: squareSize * 7.5,
+//     y: squareSize * 1.5,
+//   },
+//   velocity: {
+//     x: ghostSpeed,
+//     y: 0,
+//   },
+// }),
+// new Ghost({
+//   position: {
+//     x: squareSize * 7.5,
+//     y: squareSize * 5.5,
+//   },
+//   velocity: {
+//     x: 0,
+//     y: 0,
+//   },
+// }, 'orange'),
+// new Ghost({
+//   position: {
+//     x: squareSize * 5.5,
+//     y: squareSize * 7.5,
+//   },
+//   velocity: {
+//     x: 0,
+//     y: 0,
+//   },
+// }, 'red'),
+// new Ghost({
+//   position: {
+//     x: squareSize * 7.5,
+//     y: squareSize * 7.5,
+//   },
+//   velocity: {
+//     x: 0,
+//     y: 0,
+//   }, 
+// }, 'purple')
 ];
 var pacman = new Pacman({
     position: {
