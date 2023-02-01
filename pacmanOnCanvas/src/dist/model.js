@@ -25,7 +25,7 @@ var Pacman = /** @class */ (function () {
         this.lastY = lastY;
         this.velocityX = velocityX;
         this.velocityY = velocityY;
-        this.radius = squareSize / 2.1;
+        this.radius = squareSize / 2.15;
     }
     Pacman.prototype.draw = function () {
         ctx.beginPath();
@@ -98,5 +98,5 @@ var Ghost = /** @class */ (function () {
     return Ghost;
 }());
 var ghosts = [
-    new Ghost(squareSize * 7.5, squareSize * 7.5, ghostSpeed, 0),
+    new Ghost(squareSize * 6.5, squareSize * 1.5, 0, 0),
 ];

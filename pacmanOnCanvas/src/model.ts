@@ -29,7 +29,7 @@ class Pacman {
     public velocityX: number,
     public velocityY: number
   ) {
-    this.radius = squareSize / 2.1;
+    this.radius = squareSize / 2.15;
   }
 
   draw() {
@@ -105,7 +105,7 @@ class Ghost {
 }
 
 const ghosts: Ghost[] = [
-  new Ghost(squareSize * 7.5, squareSize * 7.5, ghostSpeed, 0),
+  new Ghost(squareSize * 6.5, squareSize * 1.5, 0, 0),
   // new Ghost(squareSize * 7.5, squareSize * 5.5, ghostSpeed, 0, 'red'),
   // new Ghost(squareSize * 5.5, squareSize * 5.5, -ghostSpeed, 0, 'purple'),
   // new Ghost(squareSize * 5.5, squareSize * 7.5, -ghostSpeed, 0, 'green')

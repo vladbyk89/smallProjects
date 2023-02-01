@@ -29,24 +29,28 @@ function detectWallCollision() {
             pacman.velocityX = 0;
             pacman.velocityY = 0;
         }
-        ghosts.forEach(function (ghost) {
-            if (isIntersect({ circle: ghost, square: wall })) {
-                console.log("ghost reached wall");
-                var direction = NaN;
-                if (ghost.velocityX == 0) {
-                    if (ghost.velocityY > 0) {
-                        ghost.velocityY = -ghostSpeed;
-                    }
-                    ghost.velocityY = ghostSpeed;
-                }
-                if (ghost.velocityY == 0) {
-                    if (ghost.velocityX > 0) {
-                        ghost.velocityX = -ghostSpeed;
-                    }
-                    ghost.velocityX = ghostSpeed;
-                }
-            }
-        });
+        // ghosts.forEach((ghost) => {
+        //   walls.forEach((wall) => {
+        //     if (isIntersect({ circle: ghost, square: wall })) {
+        //       console.log("ghost reached wall");
+        //       let direction: number = NaN;
+        //       if (ghost.velocityX == 0) {
+        //         if (ghost.velocityY > 0) {
+        //           ghost.velocityY = -ghostSpeed;
+        //         } else {
+        //           ghost.velocityY = ghostSpeed;
+        //         }
+        //       }
+        //       if (ghost.velocityY == 0) {
+        //         if (ghost.velocityX > 0) {
+        //           ghost.velocityX = -ghostSpeed;
+        //         } else {
+        //           ghost.velocityX = ghostSpeed;
+        //         }
+        //       }
+        //     }
+        //   });
+        // });
     });
 }
 function moveGhost(ghost, direction, wall) {
@@ -59,4 +63,19 @@ function moveGhost(ghost, direction, wall) {
     else {
         ghost.velocityX = direction;
     }
+}
+function isIntersect(_a) {
+    var circle = _a.circle, square = _a.square;
+    var circleTopEdge = circle.lastY - circle.radius + circle.velocityY;
+    var circleBottomEdge = circle.lastY + circle.radius + circle.velocityY;
+    var circleLeftEdge = circle.lastX - circle.radius + circle.velocityX;
+    var circleRightEdge = circle.lastX + circle.radius + circle.velocityX;
+    var squareBottomEdge = square.lastY + squareSize;
+    var squareRightEdge = square.lastX;
+    var squareTopEdge = square.lastY;
+    var squareLeftEdge = square.lastX + squareSize;
+    return (circleTopEdge <= squareBottomEdge &&
+        circleRightEdge >= squareRightEdge &&
+        circleBottomEdge >= squareTopEdge &&
+        circleLeftEdge <= squareLeftEdge);
 }
