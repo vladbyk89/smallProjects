@@ -32,15 +32,22 @@ class Pacman {
   public velocity: number;
   constructor() {
     this.velocity = 200;
+    this.currentIndex = 283
+    this.nextIndex = 283
   }
   draw() {
-    console.log('Drawing pacman')
+    squares[this.currentIndex].classList.remove("pacman");
+    squares[this.nextIndex].classList.add("pacman");
+    squares[this.nextIndex].append(eye);
+    squares[this.nextIndex].append(mouth);
+  }
+  update(){
+    this.draw();
+    this.currentIndex = this.nextIndex;
   }
 }
 
 const pacman = new Pacman();
-pacman.draw();
-console.log(pacman)
 
 class Ghost {
   className: string;

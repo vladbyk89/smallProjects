@@ -5,9 +5,12 @@ const interval = setInterval(checkForScaredGhost, 100);
 creatMaze(layout);
 
 let pacmanIndex = 283;
-squares[pacmanIndex].classList.add("pacman");
-squares[pacmanIndex].append(eye);
-squares[pacmanIndex].append(mouth);
+// squares[pacmanIndex].classList.add("pacman");
+// squares[pacmanIndex].append(eye);
+// squares[pacmanIndex].append(mouth);
+
+
+pacman.draw();
 
 let glide: number;
 

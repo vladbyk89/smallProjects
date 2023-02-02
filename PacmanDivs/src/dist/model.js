@@ -26,15 +26,22 @@ var squares = [];
 var Pacman = /** @class */ (function () {
     function Pacman() {
         this.velocity = 200;
+        this.currentIndex = 283;
+        this.nextIndex = 283;
     }
     Pacman.prototype.draw = function () {
-        console.log('Drawing pacman');
+        squares[this.currentIndex].classList.remove("pacman");
+        squares[this.nextIndex].classList.add("pacman");
+        squares[this.nextIndex].append(eye);
+        squares[this.nextIndex].append(mouth);
+    };
+    Pacman.prototype.update = function () {
+        this.draw();
+        this.currentIndex = this.nextIndex;
     };
     return Pacman;
 }());
 var pacman = new Pacman();
-pacman.draw();
-console.log(pacman);
 var Ghost = /** @class */ (function () {
     function Ghost(className, startIndex, speed) {
         this.className = className;
