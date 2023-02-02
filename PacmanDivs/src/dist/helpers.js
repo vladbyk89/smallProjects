@@ -53,6 +53,6 @@ function checkForScaredGhost() {
         }
     });
 }
-function checkForWall(direction) {
-    return !squares[pacman.currentIndex + direction].classList.contains("wall");
+function checkForWall(currentIndex, direction) {
+    return !squares[currentIndex + direction].classList.contains("wall");
 }

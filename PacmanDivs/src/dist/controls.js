@@ -23,7 +23,7 @@ function movePacman(direction) {
     squares[pacman.currentIndex].classList.remove("pacman");
     switch (direction) {
         case "left":
-            if (checkForWall(-1)) {
+            if (checkForWall(pacman.currentIndex, -1)) {
                 clearInterval(glide);
                 squares[pacman.currentIndex].removeAttribute("style"); //removing the style attribute from square that pacman leaves
                 pacman.currentIndex -= 1;
@@ -37,7 +37,7 @@ function movePacman(direction) {
             }
             break;
         case "right":
-            if (checkForWall(1)) {
+            if (checkForWall(pacman.currentIndex, 1)) {
                 clearInterval(glide);
                 squares[pacman.currentIndex].removeAttribute("style");
                 pacman.currentIndex += 1;
@@ -51,7 +51,7 @@ function movePacman(direction) {
             }
             break;
         case "up":
-            if (checkForWall(-width)) {
+            if (checkForWall(pacman.currentIndex, -width)) {
                 clearInterval(glide);
                 squares[pacman.currentIndex].removeAttribute("style");
                 pacman.currentIndex -= width;
@@ -60,7 +60,7 @@ function movePacman(direction) {
             }
             break;
         case "down":
-            if (checkForWall(width) &&
+            if (checkForWall(pacman.currentIndex, width) &&
                 !squares[pacman.currentIndex + width].classList.contains("lair")) {
                 clearInterval(glide);
                 squares[pacman.currentIndex].removeAttribute("style");
@@ -82,7 +82,7 @@ function moveGhost(ghost) {
     var direction = directions[Math.floor(Math.random() * directions.length)];
     ghost.timerId = setInterval(function test() {
         // if the square in the direction the ghost is going not containing another ghost or a wall => then he can move here
-        if (!squares[ghost.currentIndex + direction].classList.contains("wall") &&
+        if (checkForWall(ghost.currentIndex, direction) &&
             !squares[ghost.currentIndex + direction].classList.contains("ghost")) {
             squares[ghost.currentIndex].innerHTML = "";
             squares[ghost.currentIndex].classList.remove(ghost.className, "ghost", "scaredGhost");
