@@ -1,16 +1,11 @@
 console.log("Start");
-var interval = setInterval(checkForScaredGhost, 100);
+var interval = setInterval(checkForScaredGhost, 10);
 creatMaze(layout);
-var pacmanIndex = 283;
-// squares[pacmanIndex].classList.add("pacman");
-// squares[pacmanIndex].append(eye);
-// squares[pacmanIndex].append(mouth);
 pacman.draw();
 var glide;
-document.addEventListener("keydown", function (e) {
-    if (e.repeat)
-        return;
-    switch (e.key) {
+window.addEventListener("keydown", function (_a) {
+    var key = _a.key;
+    switch (key) {
         case "ArrowLeft":
             movePacman("left");
             break;

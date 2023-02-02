@@ -27,17 +27,14 @@ var Pacman = /** @class */ (function () {
     function Pacman() {
         this.velocity = 200;
         this.currentIndex = 283;
-        this.nextIndex = 283;
     }
     Pacman.prototype.draw = function () {
-        squares[this.currentIndex].classList.remove("pacman");
-        squares[this.nextIndex].classList.add("pacman");
-        squares[this.nextIndex].append(eye);
-        squares[this.nextIndex].append(mouth);
+        squares[this.currentIndex].classList.add("pacman");
+        squares[this.currentIndex].append(eye);
+        squares[this.currentIndex].append(mouth);
     };
     Pacman.prototype.update = function () {
         this.draw();
-        this.currentIndex = this.nextIndex;
     };
     return Pacman;
 }());

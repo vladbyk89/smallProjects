@@ -20,59 +20,57 @@ function creatMaze(map) {
     });
 }
 function movePacman(direction) {
-    squares[pacmanIndex].classList.remove("pacman");
+    squares[pacman.currentIndex].classList.remove("pacman");
     switch (direction) {
         case "left":
-            if (!squares[pacmanIndex - 1].classList.contains("wall")) {
+            if (!squares[pacman.currentIndex - 1].classList.contains("wall")) {
                 clearInterval(glide);
-                squares[pacmanIndex].removeAttribute("style"); //removing the style attribute from square that pacman leaves
-                pacmanIndex -= 1;
-                squares[pacmanIndex].style.transform = "scaleX(-1)";
+                squares[pacman.currentIndex].removeAttribute("style"); //removing the style attribute from square that pacman leaves
+                pacman.currentIndex -= 1;
+                squares[pacman.currentIndex].style.transform = "scaleX(-1)";
                 glide = setInterval(movePacman, pacman.velocity, "left");
             }
-            else if (pacmanIndex == 210) {
-                squares[pacmanIndex].removeAttribute("style");
-                pacmanIndex = 230;
-                squares[pacmanIndex].style.transform = "scaleX(1)";
+            else if (pacman.currentIndex == 210) {
+                squares[pacman.currentIndex].removeAttribute("style");
+                pacman.currentIndex = 230;
+                squares[pacman.currentIndex].style.transform = "scaleX(1)";
             }
             break;
         case "right":
-            if (!squares[pacmanIndex + 1].classList.contains("wall")) {
+            if (!squares[pacman.currentIndex + 1].classList.contains("wall")) {
                 clearInterval(glide);
-                squares[pacmanIndex].removeAttribute("style");
-                pacmanIndex += 1;
-                squares[pacmanIndex].style.transform = "scaleX(1)";
+                squares[pacman.currentIndex].removeAttribute("style");
+                pacman.currentIndex += 1;
+                squares[pacman.currentIndex].style.transform = "scaleX(1)";
                 glide = setInterval(movePacman, pacman.velocity, "right");
             }
-            else if (pacmanIndex == 230) {
-                squares[pacmanIndex].removeAttribute("style");
-                pacmanIndex = 210;
-                squares[pacmanIndex].style.transform = "scaleX(1)";
+            else if (pacman.currentIndex == 230) {
+                squares[pacman.currentIndex].removeAttribute("style");
+                pacman.currentIndex = 210;
+                squares[pacman.currentIndex].style.transform = "scaleX(1)";
             }
             break;
         case "up":
-            if (!squares[pacmanIndex - width].classList.contains("wall")) {
+            if (!squares[pacman.currentIndex - width].classList.contains("wall")) {
                 clearInterval(glide);
-                squares[pacmanIndex].removeAttribute("style");
-                pacmanIndex -= width;
-                squares[pacmanIndex].style.transform = "rotate(-90deg)";
+                squares[pacman.currentIndex].removeAttribute("style");
+                pacman.currentIndex -= width;
+                squares[pacman.currentIndex].style.transform = "rotate(-90deg)";
                 glide = setInterval(movePacman, pacman.velocity, "up");
             }
             break;
         case "down":
-            if (!squares[pacmanIndex + width].classList.contains("wall") &&
-                !squares[pacmanIndex + width].classList.contains("lair")) {
+            if (!squares[pacman.currentIndex + width].classList.contains("wall") &&
+                !squares[pacman.currentIndex + width].classList.contains("lair")) {
                 clearInterval(glide);
-                squares[pacmanIndex].removeAttribute("style");
-                pacmanIndex += width;
-                squares[pacmanIndex].style.transform = "rotate(90deg)";
+                squares[pacman.currentIndex].removeAttribute("style");
+                pacman.currentIndex += width;
+                squares[pacman.currentIndex].style.transform = "rotate(90deg)";
                 glide = setInterval(movePacman, pacman.velocity, "down");
             }
             break;
     }
-    squares[pacmanIndex].classList.add("pacman");
-    squares[pacmanIndex].append(eye);
-    squares[pacmanIndex].append(mouth);
+    pacman.draw();
     checkForPoint();
     checkForCherry();
     checkForGamneOver();
@@ -81,7 +79,7 @@ function movePacman(direction) {
 }
 //move ghost function
 function moveGhost(ghost) {
-    var directions = [-1, +1, -width, width];
+    var directions = [-1, 1, -width, width];
     var direction = directions[Math.floor(Math.random() * directions.length)];
     ghost.timerId = setInterval(function test() {
         // if the square in the direction the ghost is going not containing another ghost or a wall => then he can move here

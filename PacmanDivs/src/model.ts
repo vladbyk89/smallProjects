@@ -28,22 +28,19 @@ const squares = [] as Array<HTMLElement>;
 
 class Pacman {
   public currentIndex: number;
-  public nextIndex: number;
+//   public nextIndex: number;
   public velocity: number;
   constructor() {
     this.velocity = 200;
     this.currentIndex = 283
-    this.nextIndex = 283
   }
   draw() {
-    squares[this.currentIndex].classList.remove("pacman");
-    squares[this.nextIndex].classList.add("pacman");
-    squares[this.nextIndex].append(eye);
-    squares[this.nextIndex].append(mouth);
+    squares[this.currentIndex].classList.add("pacman");
+    squares[this.currentIndex].append(eye);
+    squares[this.currentIndex].append(mouth);
   }
   update(){
     this.draw();
-    this.currentIndex = this.nextIndex;
   }
 }
 

@@ -1,19 +1,19 @@
 function checkForPoint() {
-  if (squares[pacmanIndex].classList.contains("point")) {
+  if (squares[pacman.currentIndex].classList.contains("point")) {
     score++;
     palletsLeft--;
     scoreEl.textContent = score.toString();
-    squares[pacmanIndex].classList.remove("point");
-    squares[pacmanIndex].classList.add("pacman");
+    squares[pacman.currentIndex].classList.remove("point");
+    squares[pacman.currentIndex].classList.add("pacman");
   }
 }
 
 function checkForCherry() {
-  if (squares[pacmanIndex].classList.contains("cherry")) {
+  if (squares[pacman.currentIndex].classList.contains("cherry")) {
     score += 10;
     scoreEl.textContent = score.toString();
-    squares[pacmanIndex].classList.remove("cherry");
-    squares[pacmanIndex].classList.add("pacman");
+    squares[pacman.currentIndex].classList.remove("cherry");
+    squares[pacman.currentIndex].classList.add("pacman");
     ghosts.forEach((ghost) => (ghost.isScared = true));
     setTimeout(unScareGhosts, 10000);
   }
@@ -25,8 +25,8 @@ function unScareGhosts() {
 
 function checkForGamneOver() {
   if (
-    squares[pacmanIndex].classList.contains("ghost") &&
-    !squares[pacmanIndex].classList.contains("scaredGhost")
+    squares[pacman.currentIndex].classList.contains("ghost") &&
+    !squares[pacman.currentIndex].classList.contains("scaredGhost")
   ) {
     ghosts.forEach((ghost) => clearInterval(ghost.timerId));
     loseMessage.style.opacity = "1";
@@ -47,17 +47,17 @@ function checkForWin() {
 function checkForScaredGhost() {
   ghosts.forEach((ghost) => {
     if (
-      squares[pacmanIndex].classList.contains(ghost.className) &&
+      squares[pacman.currentIndex].classList.contains(ghost.className) &&
       ghost.isScared
     ) {
-      squares[pacmanIndex].classList.remove(
+      squares[pacman.currentIndex].classList.remove(
         ghost.className,
         "ghost",
         "scaredGhost"
       );
-      squares[pacmanIndex].innerHTML = "";
-      squares[pacmanIndex].append(eye);
-      squares[pacmanIndex].append(mouth);
+      squares[pacman.currentIndex].innerHTML = "";
+      squares[pacman.currentIndex].append(eye);
+      squares[pacman.currentIndex].append(mouth);
       ghost.currentIndex = ghost.startIndex;
       squares[ghost.currentIndex].classList.add("ghost", ghost.className);
       console.log("Working");
@@ -65,4 +65,8 @@ function checkForScaredGhost() {
       scoreEl.textContent = score.toString();
     }
   });
+}
+
+function checkForWall(direction:number){
+    return !squares[pacman.currentIndex + direction].classList.contains("wall")
 }
