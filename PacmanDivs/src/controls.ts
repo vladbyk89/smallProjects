@@ -1,24 +1,24 @@
-function creatMaze() {
-  for (let i = 0; i < layout.length; i++) {
+function creatMaze(map: number[]) {
+  map.forEach((value, index) => {
     const square = document.createElement("div") as HTMLDivElement;
     maze.appendChild(square);
     squares.push(square);
 
-    switch (layout[i]) {
+    switch (value) {
       case 0:
-        squares[i].classList.add("wall");
+        squares[index].classList.add("wall");
         break;
       case 1:
-        squares[i].classList.add("point");
+        squares[index].classList.add("point");
         break;
       case 2:
-        squares[i].classList.add("cherry");
+        squares[index].classList.add("cherry");
         break;
       case 3:
-        squares[i].classList.add("lair");
+        squares[index].classList.add("lair");
         break;
     }
-  }
+  });
 }
 
 function movePacman(direction: string) {
