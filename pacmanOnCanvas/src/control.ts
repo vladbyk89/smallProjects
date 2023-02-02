@@ -12,40 +12,55 @@ function animate() {
 
   ghosts.forEach((ghost) => {
     ghost.update();
-    debugger;
     const collisions: string[] = [];
     walls.forEach((wall) => {
       if (
-        isIntersect({ circle: ghost, square: wall })
+        !collisions.includes("right") &&
+        isIntersect(
+          { circle: ghost, square: wall },
+         ghostSpeed,
+          0
+        )
       ) {
         collisions.push("right");
       }
       if (
-        isIntersect({ circle: ghost, square: wall })
+        !collisions.includes("left") &&
+        isIntersect({ circle: ghost, square: wall }, -ghostSpeed, 0)
       ) {
         collisions.push("left");
       }
       if (
-        isIntersect({
-          circle: { ...ghost, velocityY: -5 },
-          square: wall,
-        })
+        !collisions.includes("up") &&
+        isIntersect(
+          {
+            circle: ghost,
+            square: wall,
+          },
+          0,
+          -ghostSpeed
+        )
       ) {
         collisions.push("up");
       }
       if (
-        isIntersect({
-          circle: { ...ghost, velocityY: 5 },
-          square: wall,
-        })
+        !collisions.includes("down") &&
+        isIntersect(
+          {
+            circle: ghost,
+            square: wall,
+          },
+          0,
+          ghostSpeed
+        )
       ) {
         collisions.push("down");
       }
-      // console.log(collisions)
       if (collisions.length > ghost.prevCollisions.length) {
         ghost.prevCollisions = collisions;
       }
-
+      // console.log(collisions);
+      // console.log(ghost.prevCollisions)
       if (JSON.stringify(collisions) == JSON.stringify(ghost.prevCollisions)) {
         if (ghost.velocityX > 0) ghost.prevCollisions.push("right");
         else if (ghost.velocityX < 0) ghost.prevCollisions.push("left");
@@ -71,10 +86,14 @@ function movePacman() {
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
       if (
-        isIntersect({
-          circle: { ...pacman, velocityX: -pacmanSpeed },
-          square: wall,
-        })
+        isIntersect(
+          {
+            circle: pacman,
+            square: wall,
+          },
+          -pacmanSpeed,
+          0
+        )
       ) {
         pacman.velocityX = 0;
         break;
@@ -86,10 +105,14 @@ function movePacman() {
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
       if (
-        isIntersect({
-          circle: { ...pacman, velocityX: pacmanSpeed },
-          square: wall,
-        })
+        isIntersect(
+          {
+            circle: pacman,
+            square: wall,
+          },
+          pacmanSpeed,
+          0
+        )
       ) {
         pacman.velocityX = 0;
         break;
@@ -101,10 +124,14 @@ function movePacman() {
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
       if (
-        isIntersect({
-          circle: { ...pacman, velocityY: -pacmanSpeed },
-          square: wall,
-        })
+        isIntersect(
+          {
+            circle: pacman,
+            square: wall,
+          },
+          0,
+          -pacmanSpeed
+        )
       ) {
         pacman.velocityY = 0;
         break;
@@ -116,10 +143,14 @@ function movePacman() {
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
       if (
-        isIntersect({
-          circle: { ...pacman, velocityY: pacmanSpeed },
-          square: wall,
-        })
+        isIntersect(
+          {
+            circle: pacman,
+            square: wall,
+          },
+          0,
+          pacmanSpeed
+        )
       ) {
         pacman.velocityY = 0;
         break;

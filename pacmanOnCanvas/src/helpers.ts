@@ -19,7 +19,7 @@ function detectPallet() {
 function detectWallCollision() {
   walls.forEach((wall) => {
     wall.draw();
-    if (isIntersect({ circle: pacman, square: wall })) {
+    if (isIntersect({ circle: pacman, square: wall }, pacman.velocityX, pacman.velocityY)) {
       console.log("Collision");
       pacman.velocityX = 0;
       pacman.velocityY = 0;
@@ -51,25 +51,25 @@ function detectWallCollision() {
   });
 }
 
-function moveGhost(ghost: Ghost, direction: number, wall: Wall) {
-  if (
-    isIntersect({
-      circle: { ...ghost, velocityX: direction },
-      square: wall,
-    })
-  ) {
-    ghost.velocityX = 0;
-  } else {
-    ghost.velocityX = direction;
-  }
-}
+// function moveGhost(ghost: Ghost, direction: number, wall: Wall) {
+//   if (
+//     isIntersect({
+//       circle: { ...ghost, velocityX: direction },
+//       square: wall,
+//     })
+//   ) {
+//     ghost.velocityX = 0;
+//   } else {
+//     ghost.velocityX = direction;
+//   }
+// }
 
 
-function isIntersect({ circle, square }) {
-  const circleTopEdge = circle.lastY - circle.radius + circle.velocityY;
-  const circleBottomEdge = circle.lastY + circle.radius + circle.velocityY;
-  const circleLeftEdge = circle.lastX - circle.radius + circle.velocityX;
-  const circleRightEdge = circle.lastX + circle.radius + circle.velocityX;
+function isIntersect({ circle, square }, vx, vy) {
+  const circleTopEdge = circle.lastY - circle.radius + vy;
+  const circleBottomEdge = circle.lastY + circle.radius + vy;
+  const circleLeftEdge = circle.lastX - circle.radius + vx;
+  const circleRightEdge = circle.lastX + circle.radius + vx;
   const squareBottomEdge = square.lastY + squareSize;
   const squareRightEdge = square.lastX;
   const squareTopEdge = square.lastY;

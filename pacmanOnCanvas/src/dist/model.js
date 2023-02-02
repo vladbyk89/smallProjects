@@ -98,5 +98,5 @@ var Ghost = /** @class */ (function () {
     return Ghost;
 }());
 var ghosts = [
-    new Ghost(squareSize * 6.5, squareSize * 1.5, 0, 0),
+    new Ghost(squareSize * 6.5, squareSize * 1.5, ghostSpeed, 0),
 ];

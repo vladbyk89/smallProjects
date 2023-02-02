@@ -1,14 +1,3 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 function detectPallet() {
     // reverse loop to avoide pallet flashing
     for (var i = pallets.length - 1; i > 0; i--) {
@@ -24,7 +13,7 @@ function detectPallet() {
 function detectWallCollision() {
     walls.forEach(function (wall) {
         wall.draw();
-        if (isIntersect({ circle: pacman, square: wall })) {
+        if (isIntersect({ circle: pacman, square: wall }, pacman.velocityX, pacman.velocityY)) {
             console.log("Collision");
             pacman.velocityX = 0;
             pacman.velocityY = 0;
@@ -53,23 +42,24 @@ function detectWallCollision() {
         // });
     });
 }
-function moveGhost(ghost, direction, wall) {
-    if (isIntersect({
-        circle: __assign(__assign({}, ghost), { velocityX: direction }),
-        square: wall
-    })) {
-        ghost.velocityX = 0;
-    }
-    else {
-        ghost.velocityX = direction;
-    }
-}
-function isIntersect(_a) {
+// function moveGhost(ghost: Ghost, direction: number, wall: Wall) {
+//   if (
+//     isIntersect({
+//       circle: { ...ghost, velocityX: direction },
+//       square: wall,
+//     })
+//   ) {
+//     ghost.velocityX = 0;
+//   } else {
+//     ghost.velocityX = direction;
+//   }
+// }
+function isIntersect(_a, vx, vy) {
     var circle = _a.circle, square = _a.square;
-    var circleTopEdge = circle.lastY - circle.radius + circle.velocityY;
-    var circleBottomEdge = circle.lastY + circle.radius + circle.velocityY;
-    var circleLeftEdge = circle.lastX - circle.radius + circle.velocityX;
-    var circleRightEdge = circle.lastX + circle.radius + circle.velocityX;
+    var circleTopEdge = circle.lastY - circle.radius + vy;
+    var circleBottomEdge = circle.lastY + circle.radius + vy;
+    var circleLeftEdge = circle.lastX - circle.radius + vx;
+    var circleRightEdge = circle.lastX + circle.radius + vx;
     var squareBottomEdge = square.lastY + squareSize;
     var squareRightEdge = square.lastX;
     var squareTopEdge = square.lastY;
