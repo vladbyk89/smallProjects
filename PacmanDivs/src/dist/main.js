@@ -1,6 +1,12 @@
 console.log("Start");
-var interval = setInterval(checkForScaredGhost, 10);
-creatMaze(layout);
+if (chosenMap) {
+    console.log(chosenMap);
+    if (chosenMap === 'mapOne') {
+        creatMaze(layout);
+    }
+    else
+        creatMaze(layout);
+}
 pacman.draw();
 var glide;
 window.addEventListener("keydown", function (_a) {
@@ -28,3 +34,4 @@ ghosts.forEach(function (ghost) {
 });
 //move each ghost randomly
 ghosts.forEach(function (ghost) { return moveGhost(ghost); });
+var interval = setInterval(checkForScaredGhost, 10);

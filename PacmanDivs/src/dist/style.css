@@ -7,7 +7,7 @@
 }
 
 :root {
-  --div-size: calc(90vh / 21) ;
+  --div-size: calc(90vh / 21);
 }
 
 body {
@@ -18,10 +18,38 @@ body {
   justify-content: space-around;
 }
 
-h1 {
-  width: 12vw;
+.welcomePage {
+  aspect-ratio: 3/2;
+  width: 80vw;
+  background-color: darkgoldenrod;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.welcomePage .choices {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
+}
+.welcomePage .choices .choice {
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  width: 45%;
+}
+.welcomePage .choices .choice img {
+  width: 100%;
+}
+.welcomePage .choices .choice:hover {
+  box-shadow: 0 0 50px black;
+  cursor: pointer;
+}
+.welcomePage button {
+  font-size: 1.5rem;
+  padding: 0.5em 2em;
 }
 
 .maze {

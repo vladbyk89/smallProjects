@@ -1,5 +1,7 @@
 var maze = document.querySelector(".maze");
+var squareSize = maze.offsetHeight / 21;
 var scoreEl = document.querySelector("#score");
+var chosenMap = localStorage.getItem("userChoice");
 var score = 0;
 var palletsLeft = 144;
 var MAX_SCORE = 144;

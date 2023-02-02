@@ -1,5 +1,11 @@
 const maze = document.querySelector(".maze") as HTMLDivElement;
+const squareSize = maze.offsetHeight / 21;
+
 const scoreEl = document.querySelector("#score") as HTMLSpanElement;
+
+const chosenMap = localStorage.getItem("userChoice");
+
+
 let score = 0;
 let palletsLeft = 144;
 const MAX_SCORE = 144;
