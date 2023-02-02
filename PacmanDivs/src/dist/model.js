@@ -24,13 +24,17 @@ var layout = [
 // an array that with hold all the divs and their classes
 var squares = [];
 var Pacman = /** @class */ (function () {
-    function Pacman(currentIndex, nextIndex) {
-        this.currentIndex = currentIndex;
-        this.nextIndex = nextIndex;
+    function Pacman() {
+        this.velocity = 200;
     }
-    Pacman.prototype.draw = function () { };
+    Pacman.prototype.draw = function () {
+        console.log('Drawing pacman');
+    };
     return Pacman;
 }());
+var pacman = new Pacman();
+pacman.draw();
+console.log(pacman);
 var Ghost = /** @class */ (function () {
     function Ghost(className, startIndex, speed) {
         this.className = className;
@@ -40,8 +44,7 @@ var Ghost = /** @class */ (function () {
         this.isScared = false;
         this.timerId = NaN;
     }
-    Ghost.prototype.draw = function () {
-    };
+    Ghost.prototype.draw = function () { };
     return Ghost;
 }());
 var ghosts = [

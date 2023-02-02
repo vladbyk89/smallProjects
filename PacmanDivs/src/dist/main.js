@@ -1,6 +1,6 @@
 console.log("Start");
 var interval = setInterval(checkForScaredGhost, 100);
-creatMaze();
+creatMaze(layout);
 var pacmanIndex = 283;
 squares[pacmanIndex].classList.add("pacman");
 squares[pacmanIndex].append(eye);

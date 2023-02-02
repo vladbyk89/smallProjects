@@ -27,9 +27,20 @@ const layout: number[] = [
 const squares = [] as Array<HTMLElement>;
 
 class Pacman {
-  constructor(public currentIndex: number, public nextIndex: number) {}
-  draw() {}
+  public currentIndex: number;
+  public nextIndex: number;
+  public velocity: number;
+  constructor() {
+    this.velocity = 200;
+  }
+  draw() {
+    console.log('Drawing pacman')
+  }
 }
+
+const pacman = new Pacman();
+pacman.draw();
+console.log(pacman)
 
 class Ghost {
   className: string;
@@ -46,9 +57,7 @@ class Ghost {
     this.isScared = false;
     this.timerId = NaN;
   }
-  draw(){
-    
-  }
+  draw() {}
 }
 
 const ghosts = [

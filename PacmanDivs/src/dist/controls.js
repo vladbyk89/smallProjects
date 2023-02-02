@@ -1,23 +1,23 @@
-function creatMaze() {
-    for (var i = 0; i < layout.length; i++) {
+function creatMaze(map) {
+    map.forEach(function (value, index) {
         var square = document.createElement("div");
         maze.appendChild(square);
         squares.push(square);
-        switch (layout[i]) {
+        switch (value) {
             case 0:
-                squares[i].classList.add("wall");
+                squares[index].classList.add("wall");
                 break;
             case 1:
-                squares[i].classList.add("point");
+                squares[index].classList.add("point");
                 break;
             case 2:
-                squares[i].classList.add("cherry");
+                squares[index].classList.add("cherry");
                 break;
             case 3:
-                squares[i].classList.add("lair");
+                squares[index].classList.add("lair");
                 break;
         }
-    }
+    });
 }
 function movePacman(direction) {
     squares[pacmanIndex].classList.remove("pacman");
@@ -28,7 +28,7 @@ function movePacman(direction) {
                 squares[pacmanIndex].removeAttribute("style"); //removing the style attribute from square that pacman leaves
                 pacmanIndex -= 1;
                 squares[pacmanIndex].style.transform = "scaleX(-1)";
-                glide = setInterval(movePacman, 200, "left");
+                glide = setInterval(movePacman, pacman.velocity, "left");
             }
             else if (pacmanIndex == 210) {
                 squares[pacmanIndex].removeAttribute("style");
@@ -42,7 +42,7 @@ function movePacman(direction) {
                 squares[pacmanIndex].removeAttribute("style");
                 pacmanIndex += 1;
                 squares[pacmanIndex].style.transform = "scaleX(1)";
-                glide = setInterval(movePacman, 200, "right");
+                glide = setInterval(movePacman, pacman.velocity, "right");
             }
             else if (pacmanIndex == 230) {
                 squares[pacmanIndex].removeAttribute("style");
@@ -56,7 +56,7 @@ function movePacman(direction) {
                 squares[pacmanIndex].removeAttribute("style");
                 pacmanIndex -= width;
                 squares[pacmanIndex].style.transform = "rotate(-90deg)";
-                glide = setInterval(movePacman, 200, "up");
+                glide = setInterval(movePacman, pacman.velocity, "up");
             }
             break;
         case "down":
@@ -66,7 +66,7 @@ function movePacman(direction) {
                 squares[pacmanIndex].removeAttribute("style");
                 pacmanIndex += width;
                 squares[pacmanIndex].style.transform = "rotate(90deg)";
-                glide = setInterval(movePacman, 200, "down");
+                glide = setInterval(movePacman, pacman.velocity, "down");
             }
             break;
     }

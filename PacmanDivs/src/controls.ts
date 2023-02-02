@@ -30,7 +30,7 @@ function movePacman(direction: string) {
         squares[pacmanIndex].removeAttribute("style"); //removing the style attribute from square that pacman leaves
         pacmanIndex -= 1;
         squares[pacmanIndex].style.transform = "scaleX(-1)";
-        glide = setInterval(movePacman, 200, "left");
+        glide = setInterval(movePacman, pacman.velocity, "left");
       } else if (pacmanIndex == 210) {
         squares[pacmanIndex].removeAttribute("style");
         pacmanIndex = 230;
@@ -44,7 +44,7 @@ function movePacman(direction: string) {
         squares[pacmanIndex].removeAttribute("style");
         pacmanIndex += 1;
         squares[pacmanIndex].style.transform = "scaleX(1)";
-        glide = setInterval(movePacman, 200, "right");
+        glide = setInterval(movePacman, pacman.velocity, "right");
       } else if (pacmanIndex == 230) {
         squares[pacmanIndex].removeAttribute("style");
         pacmanIndex = 210;
@@ -58,7 +58,7 @@ function movePacman(direction: string) {
         squares[pacmanIndex].removeAttribute("style");
         pacmanIndex -= width;
         squares[pacmanIndex].style.transform = "rotate(-90deg)";
-        glide = setInterval(movePacman, 200, "up");
+        glide = setInterval(movePacman, pacman.velocity, "up");
       }
       break;
 
@@ -71,7 +71,7 @@ function movePacman(direction: string) {
         squares[pacmanIndex].removeAttribute("style");
         pacmanIndex += width;
         squares[pacmanIndex].style.transform = "rotate(90deg)";
-        glide = setInterval(movePacman, 200, "down");
+        glide = setInterval(movePacman, pacman.velocity, "down");
       }
       break;
   }
