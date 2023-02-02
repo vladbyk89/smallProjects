@@ -60,13 +60,12 @@ function checkForScaredGhost() {
       squares[pacman.currentIndex].append(mouth);
       ghost.currentIndex = ghost.startIndex;
       squares[ghost.currentIndex].classList.add("ghost", ghost.className);
-      console.log("Working");
       score += 100;
       scoreEl.textContent = score.toString();
     }
   });
 }
 
-function checkForWall(currentIndex:number, direction:number){
-    return !squares[currentIndex + direction].classList.contains("wall")
+function checkForWall(currentIndex: number, direction: number) {
+  return !squares[currentIndex + direction].classList.contains("wall");
 }

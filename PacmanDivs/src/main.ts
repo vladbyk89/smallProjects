@@ -6,9 +6,9 @@ console.log("Start");
 if (chosenMap) {
   console.log(chosenMap)
   if(chosenMap === 'mapOne'){
-    creatMaze(layout);
+    creatMaze(mapOne);
   }
-  else creatMaze(layout)
+  else creatMaze(mapTwo)
 }
 
 
@@ -47,4 +47,5 @@ ghosts.forEach((ghost) => moveGhost(ghost));
 
 
 
-const interval = setInterval(checkForScaredGhost, 10);
+const interval = setInterval(checkForScaredGhost, 1);
+const anotherInterval = setInterval(checkForGamneOver, 1);

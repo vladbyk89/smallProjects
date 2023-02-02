@@ -2,10 +2,10 @@ console.log("Start");
 if (chosenMap) {
     console.log(chosenMap);
     if (chosenMap === 'mapOne') {
-        creatMaze(layout);
+        creatMaze(mapOne);
     }
     else
-        creatMaze(layout);
+        creatMaze(mapTwo);
 }
 pacman.draw();
 var glide;
@@ -34,4 +34,5 @@ ghosts.forEach(function (ghost) {
 });
 //move each ghost randomly
 ghosts.forEach(function (ghost) { return moveGhost(ghost); });
-var interval = setInterval(checkForScaredGhost, 10);
+var interval = setInterval(checkForScaredGhost, 1);
+var anotherInterval = setInterval(checkForGamneOver, 1);

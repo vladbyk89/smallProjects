@@ -20,7 +20,7 @@ body {
 
 .welcomePage {
   aspect-ratio: 3/2;
-  width: 80vw;
+  width: 60vw;
   background-color: darkgoldenrod;
   display: flex;
   flex-direction: column;
@@ -60,14 +60,12 @@ body {
   flex-wrap: wrap;
   position: relative;
 }
-.maze h1 {
+.maze b {
   position: absolute;
-  top: 15%;
-  left: 15%;
   font-size: 5vh;
   z-index: 1;
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,4 +190,9 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+.liveScore {
+  position: absolute;
+  color: darkblue;
 }
