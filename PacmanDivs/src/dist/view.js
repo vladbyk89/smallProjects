@@ -1,0 +1,12 @@
+var maze = document.querySelector(".maze");
+var scoreEl = document.querySelector("#score");
+var score = 0;
+var palletsLeft = 144;
+var MAX_SCORE = 144;
+var width = 21;
+var winMessage = document.querySelector(".winMessage");
+var loseMessage = document.querySelector(".loseMessage");
+var eye = document.createElement("div");
+eye.classList.add("eye");
+var mouth = document.createElement("div");
+mouth.classList.add("mouth");
