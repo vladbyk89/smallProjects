@@ -25,7 +25,7 @@ function movePacman(direction: string) {
   squares[pacman.currentIndex].classList.remove("pacman");
   switch (direction) {
     case "left":
-      if (!squares[pacman.currentIndex - 1].classList.contains("wall")) {
+      if (checkForWall(-1)) {
         clearInterval(glide);
         squares[pacman.currentIndex].removeAttribute("style"); //removing the style attribute from square that pacman leaves
         pacman.currentIndex -= 1;
@@ -39,7 +39,7 @@ function movePacman(direction: string) {
       break;
 
     case "right":
-      if (!squares[pacman.currentIndex + 1].classList.contains("wall")) {
+      if (checkForWall(1)) {
         clearInterval(glide);
         squares[pacman.currentIndex].removeAttribute("style");
         pacman.currentIndex += 1;
@@ -53,7 +53,7 @@ function movePacman(direction: string) {
       break;
 
     case "up":
-      if (!squares[pacman.currentIndex - width].classList.contains("wall")) {
+      if (checkForWall(-width)) {
         clearInterval(glide);
         squares[pacman.currentIndex].removeAttribute("style");
         pacman.currentIndex -= width;
@@ -64,7 +64,7 @@ function movePacman(direction: string) {
 
     case "down":
       if (
-        !squares[pacman.currentIndex + width].classList.contains("wall") &&
+        checkForWall(width) &&
         !squares[pacman.currentIndex + width].classList.contains("lair")
       ) {
         clearInterval(glide);
@@ -81,7 +81,6 @@ function movePacman(direction: string) {
   checkForCherry();
   checkForGamneOver();
   checkForWin();
-  // checkForScaredGhost();
 }
 
 //move ghost function
